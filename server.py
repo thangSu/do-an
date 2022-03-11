@@ -23,7 +23,8 @@ while True:
             data_out = "{time} [{add}:{port}]: {str}".format(time=current_time,add=addr[0],port=port,str=str_data)
             print(data_out)
             client.send(str.encode(str_data))
-    finally:
-        client.close()
+    except:
+        print(addr,"is disconnected")
+        print("Listening...")
 
 s.close()

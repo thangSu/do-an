@@ -1,13 +1,11 @@
 import socket
 
-host=socket.gethostbyname(socket.gethostname())
+host="54.167.124.150"
 port=8080
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server_address = (host, port)
 print('connecting to %s port ' + str(server_address))
 s.connect(server_address)
-begin="{nd:30}"
-s.sendall(bytes(begin, "utf8"))
 try:
     while True:
         msg = input('Client: ')
