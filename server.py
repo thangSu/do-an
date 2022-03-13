@@ -83,5 +83,3 @@ if __name__ == "__main__":
     print("Chờ kết nối từ các client...")
     ACCEPT_THREAD = Thread(target=connect())
     ACCEPT_THREAD.start()
-    ACCEPT_THREAD.join()
-    SERVER.close()
