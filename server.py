@@ -12,7 +12,7 @@ den2=1
 quat1=1
 quat2=1
 stop=0
-host='192.168.0.101'
+host=socket.gethostbyname(socket.gethostname())
 port=8080
 print(host,":",port)
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

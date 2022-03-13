@@ -1,4 +1,4 @@
-import socket
+impohort socket
 import threading
 host="54.167.124.150"
 port=8080
