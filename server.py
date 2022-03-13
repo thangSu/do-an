@@ -31,6 +31,7 @@ def send_phone(client):
         time.sleep(1)
 
 def handle_threading(client,addr):
+    global den2, quat1, quat2
     try:
         while True:
             data = client.recv(1024)

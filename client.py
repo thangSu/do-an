@@ -1,4 +1,4 @@
-impohort socket
+import socket
 import threading
 host="54.167.124.150"
 port=8080
@@ -6,7 +6,7 @@ s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server_address = (host, port)
 print('connecting to %s port ' + str(server_address))
 s.connect(server_address)
-a1='{"den2":14}'
+a1='{"den2":1}'
 a2='{"quat1":1}'
 a3='{"quat2":1}'
 a=[a1,a2,a3]
