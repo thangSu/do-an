@@ -2,12 +2,16 @@ import socket
 import json
 from datetime import datetime
 import random
+from threading import Thread
+import time
+now = datetime.now()
+current_time = now.strftime("%H:%M:%S:")
+
 den1=1
 den2=1
 quat1=1
 quat2=1
-now = datetime.now()
-current_time = now.strftime("%H:%M:%S:")
+stop=0
 host='192.168.0.101'
 port=8080
 print(host,":",port)
@@ -15,9 +19,18 @@ s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.bind((host, port))
 s.listen(2)
 print("listening.....")
-while True:
-    client, addr = s.accept()
-    print('Connected by', addr[0])
+def send_phone(client):
+    while True:
+        tem = random.randint(0, 100)
+        hum = random.randint(0, 100)
+        data_send = '"nd":{tem},"da":{hum},"b1":{d1},"b2":{d2},"q1":{q1},"q2":{q2}'.format(tem=tem, hum=hum, d1=den1,d2=den2, q1=quat1, q2=quat2)
+        data_send = '{' + data_send + '}\n'
+        dat_print='SEND: "nd":{tem},"da":{hum},"b1":{d1},"b2":{d2},"q1":{q1},"q2":{q2}'.format(tem=tem, hum=hum, d1=den1,d2=den2, q1=quat1, q2=quat2)
+        client.send(str.encode(data_send))
+        print(dat_print)
+        time.sleep(1)
+
+def handle_threading(client,addr):
     try:
         while True:
             data = client.recv(1024)
@@ -29,12 +42,7 @@ while True:
             data_out = "{time} [{add}:{port}]: {str}".format(time=current_time,add=addr[0],port=port,str=str_data)
             print(data_out)
             js = json.loads(str_data)
-            if "den1" in js.keys():
-                den1=~den1
-                if den1==1:
-                    print("Đèn 1 đang bật")
-                else:
-                    print("Đèn 1 đang tắt")
+
             if "den2" in js.keys():
                 den2=~den2
                 if den2==1:
@@ -53,12 +61,27 @@ while True:
                     print("Quạt 2 đang bật")
                 else:
                     print("Quạt 2 đang tắt")
-            tem=random.randint(0, 100)
-            hum=random.randint(0,100)
-            data_send = '"nd":{tem},"da":{hum},"b1":{d1},"b2":{d2},"q1":{q1},"q2":{q2}'.format(tem=tem,hum=hum,d1=den1,d2=den2,q1=quat1,q2=quat2)
-            data_send='{'+data_send+'}\n'
-            client.send(str.encode(data_send))
     except:
         print(addr,"is disconnected")
         print("Listening...")
-s.close()
+        a.join()
+        print(a.is_alive())
+def connect():
+    while True:
+        client, addr = s.accept()
+        print('Connected by', addr[0])
+        global a,b
+        a=Thread(target=send_phone, args=(client,))
+        a.start()
+        print(a.is_alive())
+        b = Thread(target=handle_threading, args=(client,addr,))
+        b.start()
+        print(b.is_alive())
+
+if __name__ == "__main__":
+    s.listen(5)
+    print("Chờ kết nối từ các client...")
+    ACCEPT_THREAD = Thread(target=connect())
+    ACCEPT_THREAD.start()
+    ACCEPT_THREAD.join()
+    SERVER.close()
