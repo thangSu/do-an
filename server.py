@@ -13,6 +13,7 @@ tb4=1
 tem=0
 hum=0
 stop=0
+cont=0
 host="192.168.0.101"
 port=80
 phone=[]
@@ -25,36 +26,28 @@ print("listening.....")
 def xu_ly(js):
     global tb2, tb1, tb3,tb4,tem,hum
     if "tb1" in js.keys():
-
+        tb1=js["tb1"]
         if js["tb1"]==0:
-            tb1=1
             print("tb1 on")
         else:
-            tb1=0
             print("tb1 off")
     if "tb2" in js.keys():
-
+         tb2=js["tb2"]
         if js["tb2"]==0:
-            tb2=1
             print("tb2 on")
         else:
-            tb2=0
             print("tb2 off")
     if "tb3" in js.keys():
-
+        tb2=js["tb2"]
         if js["tb3"]==0:
-            tb3=1
             print("tb3 on")
         else:
-            tb3=0
             print("tb3 off")
     if "tb4" in js.keys():
-
+        tb4=js["tb4"]
         if js["tb4"]==0:
-            tb4=1
             print("tb4 on")
         else:
-            tb4=0
             print("tb4 off")
     if "nd" in js.keys():
         tem =js["nd"]
@@ -80,7 +73,11 @@ def equip_threading(client,addr):
         if len(phone) == 0:
             print("không có thiết bị nào")
         else:
-            send_phone(phone[0])
+            for i in range(0,len(phone)):
+                try:
+                    send_phone(phone[i])
+                except:
+                     del phone[i]
 def phone_threading(client,addr):
     global tb2, tb1, tb3,tb4,tem,hum
     while True:
@@ -96,7 +93,7 @@ def phone_threading(client,addr):
             if len(phone) == 0:
                 print("không có thiết bị nào")
             else:
-                equipment[0].send(str.encode(str_data+"\r\n"))
+                equipment[cont].send(str.encode(str_data+"\r\n"))
 
 def connect():
     while True:
@@ -110,6 +107,7 @@ def connect():
             Thread(target=phone_threading, args=(client,addr,)).start()
             print("điện thoại đã kết nối")
         if str_data == "equip":
+            cont+=1
             equipment.append(client)
             Thread(target=equip_threading, args=(client,addr,)).start()
             print("thiết bị đã kết nối")
