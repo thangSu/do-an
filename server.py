@@ -13,7 +13,7 @@ tb4=1
 tem=0
 hum=0
 stop=0
-cont=0
+cont=-1
 host=socket.gethostbyname(socket.gethostname())
 port=8080
 phone=[]
@@ -107,7 +107,7 @@ def connect():
             Thread(target=phone_threading, args=(client,addr,)).start()
             print("điện thoại đã kết nối")
         if str_data == "equip":
-            cont+=1
+            cont=cont+1
             equipment.append(client)
             Thread(target=equip_threading, args=(client,addr,)).start()
             print("thiết bị đã kết nối")
