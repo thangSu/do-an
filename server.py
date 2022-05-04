@@ -27,25 +27,25 @@ def xu_ly(js):
     global tb2, tb1, tb3,tb4,tem,hum
     if "tb1" in js.keys():
         tb1=js["tb1"]
-        if js["tb1"]==0:
+        if js["tb1"]==1:
             print("tb1 on")
         else:
             print("tb1 off")
     if "tb2" in js.keys():
         tb2=js["tb2"]
-        if js["tb2"]==0:
+        if js["tb2"]==1:
             print("tb2 on")
         else:
             print("tb2 off")
     if "tb3" in js.keys():
         tb2=js["tb2"]
-        if js["tb3"]==0:
+        if js["tb3"]==1:
             print("tb3 on")
         else:
             print("tb3 off")
     if "tb4" in js.keys():
         tb4=js["tb4"]
-        if js["tb4"]==0:
+        if js["tb4"]==1:
             print("tb4 on")
         else:
             print("tb4 off")
