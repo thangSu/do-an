@@ -15,7 +15,7 @@ hum=0
 stop=0
 cont=0
 host=socket.gethostbyname(socket.gethostname())
-port=80
+port=8080
 phone=[]
 equipment=[]
 print(host,":",port)
