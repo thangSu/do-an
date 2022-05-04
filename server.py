@@ -38,7 +38,7 @@ def xu_ly(js):
         else:
             print("tb2 off")
     if "tb3" in js.keys():
-        tb2=js["tb2"]
+        tb3=js["tb3"]
         if js["tb3"]==1:
             print("tb3 on")
         else:
