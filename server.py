@@ -96,6 +96,7 @@ def phone_threading(client,addr):
                 equipment[cont].send(str.encode(str_data+"\r\n"))
 
 def connect():
+    global cont
     while True:
         client, addr = s.accept()
         print('Connected by', addr[0])
