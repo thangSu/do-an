@@ -20,7 +20,7 @@ phone=[]
 equipment=[]
 print(host,":",port)
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.bind(("3.84.62.72",port))
+s.bind((host,port))
 s.listen(5)
 print("listening.....")
 def xu_ly(js):
