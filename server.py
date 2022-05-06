@@ -72,7 +72,7 @@ def equip_threading(client,addr):
             js = json.loads(str_data)
             xu_ly(js)
         except:
-             print("lỗi json")
+            print("lỗi json")
             continue
         if len(phone) == 0:
             print("không có thiết bị nào")
