@@ -68,8 +68,12 @@ def equip_threading(client,addr):
             break
         data_out = "{time} [{add}:{port}]: {str}".format(time=current_time,add=addr[0],port=port,str=str_data)
         print("equip: ",data_out)
-        js = json.loads(str_data)
-        xu_ly(js)
+        try:
+            js = json.loads(str_data)
+            xu_ly(js)
+        except:
+             print("lỗi json")
+            continue
         if len(phone) == 0:
             print("không có thiết bị nào")
         else:
