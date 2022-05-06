@@ -97,8 +97,10 @@ def phone_threading(client,addr):
             if len(phone) == 0:
                 print("không có thiết bị nào")
             else:
-                equipment[cont].send(str.encode(str_data+"\r\n"))
-
+                try:
+                    equipment[cont].send(str.encode(str_data+"\r\n"))
+                except:
+                    print("chưa có thiết bị nào")
 def connect():
     global cont
     while True:
